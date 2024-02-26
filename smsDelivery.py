@@ -1,13 +1,14 @@
 import requests
 
-def get_sms_balance(api_key, email):
-    url = "https://api.umeskiasoftwares.com/api/v1/smsbalance"
+def get_sms_delivery_report(api_key, email, request_id):
+    url = "https://api.umeskiasoftwares.com/api/v1/smsdelivery"
     headers = {
         "Content-Type": "application/json"
     }
     payload = {
         "api_key": api_key,
-        "email": email
+        "email": email,
+        "request_id": request_id
     }
     response = requests.post(url, json=payload, headers=headers)
     return response.json()
@@ -15,6 +16,7 @@ def get_sms_balance(api_key, email):
 # Example usage:
 api_key = "VE5MTlkzRk06MTlwNjlkZWM="
 email = "example@gmail.com"
+request_id = "8403414672158573510"
 
-response = get_sms_balance(api_key, email)
+response = get_sms_delivery_report(api_key, email, request_id)
 print(response)

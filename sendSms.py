@@ -1,16 +1,26 @@
 import requests
-import json
 
-send_sms_url = "https://api.umeskiasoftwares.com/api/v1/sms"
+def send_sms(api_key, email, sender_id, message, phone):
+    url = "https://api.umeskiasoftwares.com/api/v1/sms"
+    headers = {
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "api_key": api_key,
+        "email": email,
+        "Sender_Id": sender_id,
+        "message": message,
+        "phone": phone
+    }
+    response = requests.post(url, json=payload, headers=headers)
+    return response.json()
 
-send_sms_data = {
-    "api_key": "SVQ4WVpPQUQ6NnpicDJsMm8=",
-    "email": "alvo967@gmail.com",
-    "Sender_Id": "23107",
-    "message": "Iko poa sasa",
-    "phone":"254768168060"
-}
+# Example usage:
+api_key = "VE5MTlkzRk06MTlwNjlkZWM="
+email = "example@gmail.com"
+sender_id = "UMS_SMS"
+message = "UMS SMS Api Test Message"
+phone = "0798765432"
 
-send_sms_res = requests.post(send_sms_url, data=json.dumps(send_sms_data))
-
-print(send_sms_res.json())
+response = send_sms(api_key, email, sender_id, message, phone)
+print(response)
